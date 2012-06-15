@@ -1,0 +1,18 @@
+
+file_search_maxima: append(file_search_maxima, ["/home/johannes/Dokumente/Informatik_Studium/4.Semester/Numerik/NumerikStuff/Maxima/###.mac"]);
+batch("round.mac");
+rekursion(max, round) := block([i, n],
+  n: 1,
+  if round > 0 then i: myRound(float(log(6 / 5)/log(%e^1)), round)
+  else i: float(log(6 / 5)/log(%e^1)),
+  while n <= max do (
+print(i),
+    if round > 0 then i: myRound(myRound(-5 * i, round) + myRound((1/n), round), round)
+    else i: (-5 * i) + (1/n),
+    n: n + 1
+  ),
+  i
+)$
+
+	
+
