@@ -1,0 +1,36 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+InverseIteration(A, mue, y0, MaxIter) := block(
+    [lu, u, iter, R, L, lperm, res, n, y, lam],
+    n: length(A),
+    y: y0,
+    lu: lu_factor(A-diagmatrix(n, mue)),
+    res: get_lu_factors(lu),
+    R: res[3],
+    print("R ", R),
+    L: res[2],
+    print("L ", L),
+    lperm: lu[2],
+    print("lperm ", lperm),
+    iter: 1,
+    while iter <= MaxIter do (
+        u: invert(L).y,
+        y: invert(R).u,
+        y: y / mat_norm(y, frobenius),
+        print(float(y)),
+        iter: iter + 1
+    ),
+    lam: y.A.y / y.y,
+    [float(lam), float(y)]
+);
+A:matrix([10, -1, 2, 0], [-1, 11, -1, 3], [2, -1, 10, -1], [0, 3, -1, 8]);
+y0:matrix([1, 1, -1, -1]);
+MaxIter: 4;
+mue: 5;
+InverseIteration(A, mue, y0, MaxIter);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

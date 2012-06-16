@@ -1,0 +1,27 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+VectorIteration(A, y0, MaxIter) := block([iter, y, lam],
+    y: y0,
+    iter: 1,
+    while iter <= MaxIter do (
+        y: A.y,
+        y: y / mat_norm(y, frobenius),
+        lam: y.A.y,
+        print("lam ", lam, " y ", y),
+        iter: iter + 1
+    ),
+    [lam, y]
+);
+A:matrix([10, -1, 2, 0], [-1, 11, -1, 3], [2, -1, 10, -1], [0, 3, -1, 8]);
+B:matrix([10, 0, 0, 0], [0, 11, 0, 0], [0, 0, 10, 0], [0, 0, 0, 8]);
+BI:matrix([0.1, 0, 0, 0], [0, 0.0909091, 0, 0], [0, 0, 0.1, 0], [0, 0, 0, 0.125]);
+M: -BI.(A - B);
+y0:matrix([-1, 1, -1, 1]);
+MaxIter: 20;
+VectorIteration(M, y0, MaxIter);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
