@@ -1,0 +1,23 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 11.08.0 ] */
+
+/* [wxMaxima: input   start ] */
+Rd10(x, t) := block([B, sign, y, z, zz, M, z1, tintern, res],
+    B: 10,
+    tintern: t + 1,
+    sign: signum(x),
+    if sign = 0 then return(0),
+    y: abs(x),
+    M: floor(log(y)/log(B)) + 1,
+    y: y * B^-M,
+    zz: floor(y*B^tintern),
+    z: floor(zz*B^-1),
+    z1: zz - B * z,
+    if z1 >= B/2 then z: z + 1,
+    res: sign * z * B^-t * B^M,
+    res
+);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
