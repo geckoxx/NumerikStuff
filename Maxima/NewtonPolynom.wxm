@@ -1,0 +1,31 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+/* Implementierung Newton-Verfahren für Nullstellen von Polynom (basierend auf Horner- Schema) */
+/* la: Liste der Koeffizienten, beginnedn mit x^n */
+
+NewtonPolynom(la, x0, niter) := block([p, b, c, n, iter, j],
+    n: length(la) - 1,
+    p: x0,
+    iter: 1,
+    while iter <= niter do (
+        b: la[1],
+        c: b,
+        b: la[2] + p * b,
+        j: 2,
+        while j <= n do (
+            c: b + p * c,
+            b: la[j + 1] + p * b,
+            j: j + 1
+        ),
+        print(" p ", p, " P(p)  ", b, " P'(p)  ", c),
+        p: p - b / c,
+        iter: iter + 1
+    ),
+    p
+)$
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

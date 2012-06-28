@@ -1,0 +1,23 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.04.0 ] */
+
+/* [wxMaxima: input   start ] */
+Newton(f, x0, niter) := block([x, df, iter],
+    df(x) := block([_x], subst(_x=x,diff(f(_x), _x))),
+    x: x0,
+    iter: 1,
+    while iter <= niter do (
+        x: float(x - f(x) / df(x)),
+        print(x),
+        iter: iter + 1
+    ),
+    x
+)$
+/*f(x) := x^5 - 18;
+Newton(f, 2, 5);*/
+f(x) := tan(x) - x;
+Newton(ff, 4.45, 6);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
